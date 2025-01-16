@@ -1,0 +1,54 @@
+= God Mode
+
+== Description
+
+This is a plugin for Kakoune that is inspired by
+https://github.com/emacsorphanage/god-mode[Emacs' God Mode] that gives the
+user a locked mode to emulate the `alt` bindings.
+
+The mappings are only applied after you call `god-mode-activate-mappings`. To
+modify which keys are mapped, make sure you change the options listed below
+*before* calling the command.
+
+== Options
+
+*god_alt_bindings* `str-list`::
+	These are the alt-prefixed keys that don't require any user interaction.
+
+	Example:
+	----
+	set-option global god_alt_bindings \
+		'n' 'u' 'o' ',' 's' 'p' '.' \
+		'N' 'U' 'O' '(' ')' 'C' 'R'
+
+	set-option -add global god_alt_bindings '+'
+	----
+
+*god_alt_to_char_bindings* `str-list`::
+	These are the alt-prefixed keys that require a single character input.
+
+	Example:
+	----
+	set-option global god_alt_to_char_bindings \
+		'f' 't' \
+		'F' 'T'
+	----
+
+*god_alt_prompt_bindings* `str-list`::
+	These are the alt-prefixed keys that require a prompt.
+
+	Example:
+	----
+	set-option global god_alt_prompt_bindings \
+		'/' 'k' \
+		'?' 'K'
+	----
+
+== Commands
+
+*god-mode-activate-mappings*::
+	This is the command you run after you modify the options for `god-mode`
+	and configure the key for entering the user mode.
+
+	The ordering of this command is very significant. Make sure it is
+	called last.

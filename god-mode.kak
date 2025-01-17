@@ -74,12 +74,10 @@ define-command -docstring %{
 	called last.
 } god-mode-activate-mappings %{
 	evaluate-commands %sh{
-		mappings=""
-
 		eval set -- "$kak_quoted_opt_god_alt_bindings"
 
 		while [ $# -ne 0 ]; do
-			mappings="$mappings \n map global god-mode $1 '<a-$1>:enter-user-mode god-mode<ret>'"
+			printf "$mappings \n map global god-mode $1 '<a-$1>:enter-user-mode god-mode<ret>'"
 
 			shift 1
 		done
@@ -90,7 +88,7 @@ define-command -docstring %{
 		eval set -- "$kak_quoted_opt_god_alt_to_char_bindings"
 
 		while [ $# -ne 0 ]; do
-			mappings="$mappings \n map global god-mode $1 ':god-mode-change-reenter \"next-key[to-char]\" <lt>a-$1<gt><ret>'"
+			printf "$mappings \n map global god-mode $1 ':god-mode-change-reenter \"next-key[to-char]\" <lt>a-$1<gt><ret>'"
 
 			shift 1
 		done
@@ -98,11 +96,9 @@ define-command -docstring %{
 		eval set -- "$kak_quoted_opt_god_alt_prompt_bindings"
 
 		while [ $# -ne 0 ]; do
-			mappings="$mappings \n map global god-mode $1 ':god-mode-change-reenter \"prompt\" <lt>a-$1<gt><ret>'"
+			printf "$mappings \n map global god-mode $1 ':god-mode-change-reenter \"prompt\" <lt>a-$1<gt><ret>'"
 
 			shift 1
 		done
-
-		printf "$mappings"
 	}
 }
